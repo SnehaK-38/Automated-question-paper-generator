@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduGen</title>
+    <meta name="description" content="AI-powered educational platform for question generation and student management" />
+    <style>
+      /* Loading screen styles */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      
+      .loading-content {
+        text-align: center;
+        color: white;
+      }
+      
+      .loading-logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+      }
+
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top: 4px solid white;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      
+      .loading-subtext {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 16px;
+        opacity: 0.8;
+      }
+      
+      /* Hide loading screen after app loads */
+      .app-loaded .loading-screen {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-content">
+        <!-- ✅ EduGen logo -->
+        <img src="/logo.png" alt="EduGen Logo" class="loading-logo" />
+        
+        <!-- Spinner -->
+        <div class="loading-spinner"></div>
+        
+        <!-- Text -->
+        <div class="loading-text">EduGen</div>
+        <div class="loading-subtext">Generating smart questions for you…</div>
+      </div>
+    </div>
+    
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <script>
+      // Hide loading screen after React app loads
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          document.body.classList.add('app-loaded');
+          setTimeout(() => {
+            document.getElementById('loadingScreen').style.display = 'none';
+          }, 500);
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
